@@ -3,7 +3,11 @@
 Some simple runit scripts to automate starting and stopping the
 [[https://darkrenaissance.github.io/darkfi/misc/darkirc/darkirc.html][DarkIRC]] daemon.
 
-----
+-----
+
+<p align="left"><a href="https://www.gnu.org/software/emacs/"><img
+src="assets/powered_by_emacs.svg"></a></p>
+
 
 ![This project is powered by emacs](assets/powered_by_emacs.svg)
 ![This project is powered by orgmode](assets/powered_by_org_mode.svg)
