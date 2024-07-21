@@ -1,0 +1,10 @@
+* DarkIRC-Runit
+
+Some simple runit scripts to automate starting and stopping the
+[[https://darkrenaissance.github.io/darkfi/misc/darkirc/darkirc.html][DarkIRC]] daemon.
+
+----
+
+[[file:assets/powered_by_emacs.svg][This project is powered by emacs]]
+[[file:assets/powered_by_org_mode.svg][This project is powered by orgmode]]
+
