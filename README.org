@@ -3,6 +3,18 @@
 Some simple runit scripts to automate starting and stopping the
 [[https://darkrenaissance.github.io/darkfi/misc/darkirc/darkirc.html][DarkIRC]] daemon.
 
+** todos
+
+*** TODO do we need to use the command =termux-wake-lock= ?
+
+Can we do it without it?  How badly does android (grapheneOS) want to
+kill it when it's in the background?
+
+*** TODO fill-in the following scripts [/]
+
+- [ ] bin/setup.sh
+- [ ] bin/darkirc/*
+
 ** Setup
 
 Git clone this repo in your termux home directory.  And then =cd= into
@@ -33,29 +45,46 @@ environment, and then installing the =termux-services= which installs
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
   #!/data/data/com.termux/files/usr/bin/bash
-  runit_dir="${HOME}/.config/sv"
   pkg upgrade -y
   pkg install termux-services -y
+  homelocalbin="${HOME}/.local/bin"
+  runit_dir="${HOME}/.config/sv"
 #+end_src
 
-Create the directory structure for runit service files:
+Create the directories for the binarya and for the runit service
+files:
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+  # if ${homelocaldir} does NOT exist
+  # then create ${homelocaldir}
+  # else do nothing
+
   # if ${runit_dir} does NOT exist
   # then create ${runit_dir}
   # else do nothing
 #+end_src
 
-Move the runit scripts into the =${runit_dir}=:
+Copy the runit scripts into the =${runit_dir}= and make them
+executable:
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
-  # mv bin/darkirc -t ${runit_dir}
+  # cp bin/darkirc -t ${runit_dir}
+  # you need to make the runit scripts executable as well
 #+end_src
 
+Copy the =darkirc.aarch64-android= binary into its place and make it
+executable:
+
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+  # cp bin/darkirc.aarch64-android -t ${homelocalbin}
+  # chmod u+x ${homelocalbin}/darkirc.aarch64-android
+#+end_src
 
 ** Runit scripts
 
-We use runit
+We use runit to start and stop the =darkirc= daemon running in the
+background.  We also use =svloggerd= to keep the redirec the stdout
+of =darkirc= daemon to runit logging utility.
 
 -----
 
