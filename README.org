@@ -5,13 +5,6 @@ Some simple runit scripts to automate starting and stopping the
 
 -----
 
-#+begin_src html
-  <p align="left"><a href="https://www.gnu.org/software/emacs/"><img
-  src="assets/powered_by_emacs.svg"></a></p>
-
-#+end_src
-
-
-![This project is powered by emacs](assets/powered_by_emacs.svg)
-![This project is powered by orgmode](assets/powered_by_org_mode.svg)
+[[file:assets/powered_by_emacs.svg][This project is powered by emacs]]
+[[file:assets/powered_by_org_mode.svg][This project is powered by orgmode]]
 
