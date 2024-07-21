@@ -27,11 +27,29 @@ Setup script prepares termux for running the
 1) runit scripts
 2) darkirc daemon
 
-Start by updating the termux environment:
+Start by defining the runit-related directories, updating the termux
+environment, and then installing the =termux-services= which installs
+=runit= along with it:
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
   #!/data/data/com.termux/files/usr/bin/bash
+  runit_dir="${HOME}/.config/sv"
   pkg upgrade -y
+  pkg install termux-services -y
+#+end_src
+
+Create the directory structure for runit service files:
+
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+  # if ${runit_dir} does NOT exist
+  # then create ${runit_dir}
+  # else do nothing
+#+end_src
+
+Move the runit scripts into the =${runit_dir}=:
+
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+  # mv bin/darkirc -t ${runit_dir}
 #+end_src
 
 
