@@ -3,6 +3,16 @@
 Some simple runit scripts to automate starting and stopping the
 [[https://darkrenaissance.github.io/darkfi/misc/darkirc/darkirc.html][DarkIRC]] daemon.
 
+** Setup
+
+Git clone this repo in your termux home directory.  And then =cd= into
+the cloned dir.
+
+#+begin_src bash
+  git clone https://github.com/k4r4b3y/darkirc-runit.git
+
+#+end_src
+
 -----
 
 [[file:assets/powered_by_emacs.svg][This project is powered by emacs]]
