@@ -10,8 +10,34 @@ the cloned dir.
 
 #+begin_src bash
   git clone https://github.com/k4r4b3y/darkirc-runit.git
+  cd darkirc-runit
+#+end_src
+
+Then, you should run the install script:
+
+#+begin_src bash
+  ./bin/setup.sh
 
 #+end_src
+
+** Setup script
+
+Setup script prepares termux for running the
+
+1) runit scripts
+2) darkirc daemon
+
+Start by updating the termux environment:
+
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+  #!/data/data/com.termux/files/usr/bin/bash
+  pkg upgrade -y
+#+end_src
+
+
+** Runit scripts
+
+We use runit
 
 -----
 
