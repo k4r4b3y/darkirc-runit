@@ -20,7 +20,7 @@ Then, you should run the install script:
 
 #+end_src
 
-** Setup script
+*** bin/setup.sh
 
 Setup script prepares termux for running the
 
