@@ -5,6 +5,6 @@ Some simple runit scripts to automate starting and stopping the
 
 ----
 
-[[file:assets/powered_by_emacs.svg][This project is powered by emacs]]#+ATTR_HTML: :width 200px :height 100px
-[[file:assets/powered_by_org_mode.svg][This project is powered by orgmode]]
+![This project is powered by emacs](assets/powered_by_emacs.svg)
+![This project is powered by orgmode](assets/powered_by_org_mode.svg)
 
