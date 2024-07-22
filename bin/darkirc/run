@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/sh
+exec 2>&1
+exec ${homelocalbin_dir}/${darkirc_bin}

@@ -52,8 +52,16 @@ environment, and then installing the =termux-services= which installs
   #!/data/data/com.termux/files/usr/bin/bash
   pkg upgrade -y
   pkg install termux-services -y
+#+end_src
+
+Define some file and directory paths as variables:
+
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
   homelocalbin_dir="${HOME}/.local/bin"
   runit_dir="${HOME}/.config/sv"
+  darkirc_bin="darkirc.aarch64-android"
+  darkirc_conf="${HOME}/.config/darkfi/darkirc_config.toml"
+  svdir="${PREFIX}/var/service"
 #+end_src
 
 Create the directories for the binary and for the runit service
@@ -73,23 +81,74 @@ Copy the runit scripts into the =${runit_dir}= and make them
 executable:
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
-  # cp bin/darkirc -t ${runit_dir}
-  # you need to make the runit scripts executable as well
+  cp bin/darkirc -t ${runit_dir}
+  chmod u+x ${runit_dir}/darkirc/run ${runit_dir}/darkirc/log/run
 #+end_src
 
 Copy the =darkirc.aarch64-android= binary into its place and make it
 executable:
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
-  # cp bin/darkirc.aarch64-android -t ${homelocalbin_dir}
-  # chmod u+x ${homelocalbin_dir}/darkirc.aarch64-android
+  cp bin/${darkirc_bin} -t ${homelocalbin_dir}
+  chmod u+x ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
+
+And execute it the first time IF the config file isn't in its place:
+
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+  if [ ! -f "${darkirc_conf}" ]; then
+    ${homelocalbin_dir}/${darkirc_bin}
+  fi
+#+end_src
+
+Symlink the runit files to =${SVDIR}=.  
+
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+  ln -sf ${runit_dir} ${svdir}/
+#+end_src
+
 
 ** Runit scripts
 
 We use runit to start and stop the =darkirc= daemon running in the
 background.  We also use =svloggerd= to keep the redirec the stdout
 of =darkirc= daemon to runit logging utility.
+
+*** conf
+
+This file will hold the environment variables.
+
+#+begin_src bash :tangle ./bin/darkirc/conf :mkdirp yes
+  homelocalbin_dir="${HOME}/.local/bin"
+  darkirc_bin="darkirc.aarch64-android"
+  svlogger="/data/data/com.termux/files/usr/share/termux-services/svlogger"
+#+end_src
+
+*** run
+
+This script starts the =darkirc=.  Redirect the stderr to stdout, so
+that we can keep track of the errors with =svloggerd=.
+
+#+begin_src bash :tangle ./bin/darkirc/run :mkdirp yes
+  #!/data/data/com.termux/files/usr/bin/sh
+  exec 2>&1
+  exec ${homelocalbin_dir}/${darkirc_bin}
+#+end_src
+
+*** log
+
+#+begin_src bash :tangle ./bin/darkirc/log/run :mkdirp yes
+  #!/data/data/com.termux/files/usr/bin/sh
+  exec "${svlogger}" "$@"
+#+end_src
+
+#+begin_src bash :tangle ./bin/darkirc/log :mkdirp yes
+  # create symlink to the $SVDIR
+  ln -sf ${xmr_runit_dir} ${SVDIR}/
+
+  # TODO: also add run conditions using termux-api for battery, and network state (wifi vs data)
+
+#+end_src
 
 -----
 
