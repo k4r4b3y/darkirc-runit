@@ -39,7 +39,7 @@ command if you want.
 Check the sha256sum of the =darkirc= binary:
 
 #+begin_src bash
-  cd ${HOME}/darkfi-runit/bin
+  cd ${HOME}/darkirc-runit/bin
   shasum -c shasum.txt.asc
 #+end_src
 
@@ -57,7 +57,7 @@ key on [[https://karapara.kyun.li/gpg]].
 Then, you should run the install script:
 
 #+begin_src bash
-  ${HOME}/darkfi-runit/bin/setup.sh
+  ${HOME}/darkirc-runit/bin/setup.sh
 #+end_src
 
 During the =setup.sh= script execution, you might see your termux
@@ -92,7 +92,7 @@ this repo does.  Read on if you are curious.
 
 *** bin/setup.sh
 
-Setup script prepares termux for running the
+Setup script prepares the termux envrionment for running the
 
 1) runit scripts
 2) darkirc daemon
