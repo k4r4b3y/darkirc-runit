@@ -28,6 +28,12 @@ CLOSED: [2024-07-22 Mon 15:59]
 So that when we clone it, we can now there hasn't been any meddling on
 the github's side.
 
+*** TODO fix the conf stuff
+
+Don't use the conf file.  Instead, put the env variables into their
+runit scripts.  I am having trouble with running the runit service.
+Also, don't use ${PREFIX} in runit scripts, use full path.
+
 ** Setup
 
 Git clone this repo in your termux home directory.  And then =cd= into
