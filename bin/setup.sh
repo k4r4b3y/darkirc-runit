@@ -16,10 +16,10 @@ if [ ! -d "${runit_dir}" ]; then
   mkdir -p "${runit_dir}"
 fi
 
-cp bin/darkirc -t ${runit_dir}
+cp -r bin/darkirc -t ${runit_dir}
 chmod u+x ${runit_dir}/darkirc/run ${runit_dir}/darkirc/log/run
 
-cp bin/${darkirc_bin} -t ${homelocalbin_dir}
+cp -r bin/${darkirc_bin} -t ${homelocalbin_dir}
 chmod u+x ${homelocalbin_dir}/${darkirc_bin}
 
 if [ ! -f "${darkirc_conf}" ]; then

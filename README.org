@@ -90,7 +90,7 @@ Copy the runit scripts into the =${runit_dir}= and make them
 executable:
 
 #+begin_src bash :tangle ./bin/setup.sh
-  cp bin/darkirc -t ${runit_dir}
+  cp -r bin/darkirc -t ${runit_dir}
   chmod u+x ${runit_dir}/darkirc/run ${runit_dir}/darkirc/log/run
 #+end_src
 
@@ -98,7 +98,7 @@ Copy the =darkirc.aarch64-android= binary into its place and make it
 executable:
 
 #+begin_src bash :tangle ./bin/setup.sh
-  cp bin/${darkirc_bin} -t ${homelocalbin_dir}
+  cp -r bin/${darkirc_bin} -t ${homelocalbin_dir}
   chmod u+x ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
 
