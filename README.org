@@ -34,6 +34,7 @@ Git clone this repo in your termux home directory.  And then =cd= into
 the cloned dir.
 
 #+begin_src bash
+  pkg install git
   git clone https://github.com/k4r4b3y/darkirc-runit.git
   cd darkirc-runit
 #+end_src
