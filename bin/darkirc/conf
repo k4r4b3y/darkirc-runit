@@ -1,3 +1,1 @@
-homelocalbin_dir="${HOME}/.local/bin"
-darkirc_bin="darkirc.aarch64-android"
-svlogger="${PREFIX}/share/termux-services/svlogger"
+# empty for now

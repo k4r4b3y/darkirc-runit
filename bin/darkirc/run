@@ -1,3 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/sh
+homelocalbin_dir="${HOME}/.local/bin"
+darkirc_bin="darkirc.aarch64-android"
 exec 2>&1
 exec ${homelocalbin_dir}/${darkirc_bin}

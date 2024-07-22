@@ -161,9 +161,7 @@ of =darkirc= daemon to runit logging utility.
 This file will hold the environment variables.
 
 #+begin_src bash :tangle ./bin/darkirc/conf :mkdirp yes
-  homelocalbin_dir="${HOME}/.local/bin"
-  darkirc_bin="darkirc.aarch64-android"
-  svlogger="${PREFIX}/share/termux-services/svlogger"
+  # empty for now
 #+end_src
 
 *** run
@@ -172,6 +170,8 @@ This script starts the =darkirc=.  Redirect the stderr to stdout, so
 that we can keep track of the errors with =svloggerd=.
 
 #+begin_src bash :tangle ./bin/darkirc/run :mkdirp yes :shebang #!/data/data/com.termux/files/usr/bin/sh
+  homelocalbin_dir="${HOME}/.local/bin"
+  darkirc_bin="darkirc.aarch64-android"
   exec 2>&1
   exec ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
@@ -179,6 +179,7 @@ that we can keep track of the errors with =svloggerd=.
 *** log/run
 
 #+begin_src bash :tangle ./bin/darkirc/log/run :mkdirp yes :shebang #!/data/data/com.termux/files/usr/bin/sh
+  svlogger="${PREFIX}/share/termux-services/svlogger"
   exec "${svlogger}" "$@"
 #+end_src
 
