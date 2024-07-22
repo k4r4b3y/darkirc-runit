@@ -15,6 +15,11 @@ kill it when it's in the background?
 - [ ] bin/setup.sh
 - [ ] bin/darkirc/*
 
+*** TODO sign the sha256sum of the =darkirc.aarch64-android= you bundle with this repo
+
+So that when we clone it, we can now there hasn't been any meddling on
+the github's side.
+
 ** Setup
 
 Git clone this repo in your termux home directory.  And then =cd= into
@@ -47,21 +52,21 @@ environment, and then installing the =termux-services= which installs
   #!/data/data/com.termux/files/usr/bin/bash
   pkg upgrade -y
   pkg install termux-services -y
-  homelocalbin="${HOME}/.local/bin"
+  homelocalbin_dir="${HOME}/.local/bin"
   runit_dir="${HOME}/.config/sv"
 #+end_src
 
-Create the directories for the binarya and for the runit service
-files:
+Create the directories for the binary and for the runit service
+files if they do not already exist:
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
-  # if ${homelocaldir} does NOT exist
-  # then create ${homelocaldir}
-  # else do nothing
+  if [ ! -d "${homelocalbin_dir}" ]; then
+    mkdir -p "${homelocalbin_dir}"
+  fi
 
-  # if ${runit_dir} does NOT exist
-  # then create ${runit_dir}
-  # else do nothing
+  if [ ! -d "${runit_dir}" ]; then
+    mkdir "${runit_dir}"
+  fi
 #+end_src
 
 Copy the runit scripts into the =${runit_dir}= and make them
@@ -76,8 +81,8 @@ Copy the =darkirc.aarch64-android= binary into its place and make it
 executable:
 
 #+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
-  # cp bin/darkirc.aarch64-android -t ${homelocalbin}
-  # chmod u+x ${homelocalbin}/darkirc.aarch64-android
+  # cp bin/darkirc.aarch64-android -t ${homelocalbin_dir}
+  # chmod u+x ${homelocalbin_dir}/darkirc.aarch64-android
 #+end_src
 
 ** Runit scripts
