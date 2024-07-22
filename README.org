@@ -10,10 +10,14 @@ Some simple runit scripts to automate starting and stopping the
 Can we do it without it?  How badly does android (grapheneOS) want to
 kill it when it's in the background?
 
-*** TODO fill-in the following scripts [/]
+*** DONE fill-in the following scripts [2/2]
+CLOSED: [2024-07-22 Mon 16:01]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-07-22 Mon 16:01]
+:END:
 
-- [ ] bin/setup.sh
-- [ ] bin/darkirc/*
+- [X] bin/setup.sh
+- [X] bin/darkirc/*
 
 *** DONE sign the sha256sum of the =darkirc.aarch64-android= you bundle with this repo
 CLOSED: [2024-07-22 Mon 15:59]
