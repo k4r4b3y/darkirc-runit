@@ -139,7 +139,7 @@ And execute it the first time IF the config file isn't in its place:
 Symlink the runit files to =${SVDIR}=.  
 
 #+begin_src bash :tangle ./bin/setup.sh
-  ln -sf ${runit_dir} ${svdir}/
+  ln -sf ${runit_dir}/darkirc ${svdir}/
 #+end_src
 
 

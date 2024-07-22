@@ -26,4 +26,4 @@ if [ ! -f "${darkirc_conf}" ]; then
   ${homelocalbin_dir}/${darkirc_bin}
 fi
 
-ln -sf ${runit_dir} ${svdir}/
+ln -sf ${runit_dir}/darkirc ${svdir}/
