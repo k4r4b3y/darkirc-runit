@@ -92,6 +92,7 @@ environment, and then installing the =termux-services= which installs
 Define some file and directory paths as variables:
 
 #+begin_src bash :tangle ./bin/setup.sh
+  repo_dir="${HOME}/darkirc-runit"
   homelocalbin_dir="${HOME}/.local/bin"
   runit_dir="${HOME}/.config/sv"
   darkirc_bin="darkirc.aarch64-android"
@@ -116,7 +117,7 @@ Copy the runit scripts into the =${runit_dir}= and make them
 executable:
 
 #+begin_src bash :tangle ./bin/setup.sh
-  cp -r bin/darkirc -t ${runit_dir}
+  cp -r ${repo_dir}/bin/darkirc -t ${runit_dir}
   chmod u+x ${runit_dir}/darkirc/run ${runit_dir}/darkirc/log/run
 #+end_src
 
@@ -124,7 +125,7 @@ Copy the =darkirc.aarch64-android= binary into its place and make it
 executable:
 
 #+begin_src bash :tangle ./bin/setup.sh
-  cp -r bin/${darkirc_bin} -t ${homelocalbin_dir}
+  cp -r ${repo_dir}/bin/${darkirc_bin} -t ${homelocalbin_dir}
   chmod u+x ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
 
