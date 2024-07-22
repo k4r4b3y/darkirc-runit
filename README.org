@@ -121,7 +121,7 @@ This file will hold the environment variables.
 #+begin_src bash :tangle ./bin/darkirc/conf :mkdirp yes
   homelocalbin_dir="${HOME}/.local/bin"
   darkirc_bin="darkirc.aarch64-android"
-  svlogger="/data/data/com.termux/files/usr/share/termux-services/svlogger"
+  svlogger="${PREFIX}/share/termux-services/svlogger"
 #+end_src
 
 *** run
@@ -135,20 +135,13 @@ that we can keep track of the errors with =svloggerd=.
   exec ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
 
-*** log
+*** log/run
 
 #+begin_src bash :tangle ./bin/darkirc/log/run :mkdirp yes
   #!/data/data/com.termux/files/usr/bin/sh
   exec "${svlogger}" "$@"
 #+end_src
 
-#+begin_src bash :tangle ./bin/darkirc/log :mkdirp yes
-  # create symlink to the $SVDIR
-  ln -sf ${xmr_runit_dir} ${SVDIR}/
-
-  # TODO: also add run conditions using termux-api for battery, and network state (wifi vs data)
-
-#+end_src
 
 -----
 
