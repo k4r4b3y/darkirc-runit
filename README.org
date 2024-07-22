@@ -87,10 +87,44 @@ Configuration file '/data/data/com.termux/files/usr/etc/apt/sources.list'
 
 Here, you can press =Y= and then hit =enter=.
 
+*** Start the darkirc daemon
+
+If the setup executes without errors, you should be able to start the
+=darkirc= daemon in the background using the command:
+
+#+begin_src bash
+  sv-enable darkirc
+#+end_src
+
+From then on, whenever you start termux app, the =darkirc= daemon will
+also get started in the backgruond.
+
+*** Stop the darkirc daemon
+
+If you want to stop the daemon, use the following command:
+
+#+begin_src bash
+  sv-disable darkirc
+#+end_src
+
+From then on, =darkirc= daemon won't be started automatically whenever
+you start the termux app.
+
+*** Check the logs of darkirc daemon
+
+To check the logs of the daemon, use the following command:
+
+#+begin_src bash
+  tail -f ${PREFIX}/var/log/sv/darkirc/current
+#+end_src
+
+-----
+
 The rest of the documentation will go into what each of the scripts in
 this repo does.  Read on if you are curious.
 
-*** bin/setup.sh
+** Documentation
+*** Setup script
 
 Setup script prepares the termux envrionment for running the
 
@@ -160,14 +194,13 @@ Symlink the runit files to =${SVDIR}=.
   ln -sf ${runit_dir}/darkirc ${svdir}/
 #+end_src
 
-
-** Runit scripts
+*** Runit scripts
 
 We use runit to start and stop the =darkirc= daemon running in the
 background.  We also use =svloggerd= to keep the redirec the stdout
 of =darkirc= daemon to runit logging utility.
 
-*** conf
+**** conf
 
 This file will hold the environment variables.
 
@@ -175,7 +208,7 @@ This file will hold the environment variables.
   # empty for now
 #+end_src
 
-*** run
+**** run
 
 This script starts the =darkirc=.  Redirect the stderr to stdout, so
 that we can keep track of the errors with =svloggerd=.
@@ -187,7 +220,7 @@ that we can keep track of the errors with =svloggerd=.
   exec ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
 
-*** log/run
+**** log/run
 
 #+begin_src bash :tangle ./bin/darkirc/log/run :mkdirp yes :shebang #!/data/data/com.termux/files/usr/bin/sh
   svlogger="${PREFIX}/share/termux-services/svlogger"
