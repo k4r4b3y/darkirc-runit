@@ -31,10 +31,11 @@ the github's side.
 ** Setup
 
 Git clone this repo in your termux home directory.  And then =cd= into
-the cloned dir.
+the cloned dir.  Install =perl= so that you can use =shasum -c=
+command if you want.
 
 #+begin_src bash
-  pkg install git -y
+  pkg install git perl gnupg -y
   git clone https://github.com/k4r4b3y/darkirc-runit.git
   cd darkirc-runit
 #+end_src
