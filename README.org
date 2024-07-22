@@ -27,9 +27,8 @@ battery settings -> allow running in the background, is enough?
 
 ** Setup
 
-Git clone this repo in your termux home directory.  And then =cd= into
-the cloned dir.  Install =perl= so that you can use =shasum -c=
-command if you want.
+Git clone this repo in your termux home directory.  Install =perl= so
+that you can use =shasum -c= command if you want.
 
 #+begin_src bash
   pkg install git perl gnupg -y
