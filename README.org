@@ -48,15 +48,14 @@ Start by defining the runit-related directories, updating the termux
 environment, and then installing the =termux-services= which installs
 =runit= along with it:
 
-#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
-  #!/data/data/com.termux/files/usr/bin/bash
+#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes :shebang #!/data/data/com.termux/files/usr/bin/bash
   pkg upgrade -y
   pkg install termux-services -y
 #+end_src
 
 Define some file and directory paths as variables:
 
-#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+#+begin_src bash :tangle ./bin/setup.sh
   homelocalbin_dir="${HOME}/.local/bin"
   runit_dir="${HOME}/.config/sv"
   darkirc_bin="darkirc.aarch64-android"
@@ -67,7 +66,7 @@ Define some file and directory paths as variables:
 Create the directories for the binary and for the runit service
 files if they do not already exist:
 
-#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+#+begin_src bash :tangle ./bin/setup.sh
   if [ ! -d "${homelocalbin_dir}" ]; then
     mkdir -p "${homelocalbin_dir}"
   fi
@@ -80,7 +79,7 @@ files if they do not already exist:
 Copy the runit scripts into the =${runit_dir}= and make them
 executable:
 
-#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+#+begin_src bash :tangle ./bin/setup.sh
   cp bin/darkirc -t ${runit_dir}
   chmod u+x ${runit_dir}/darkirc/run ${runit_dir}/darkirc/log/run
 #+end_src
@@ -88,14 +87,14 @@ executable:
 Copy the =darkirc.aarch64-android= binary into its place and make it
 executable:
 
-#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+#+begin_src bash :tangle ./bin/setup.sh
   cp bin/${darkirc_bin} -t ${homelocalbin_dir}
   chmod u+x ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
 
 And execute it the first time IF the config file isn't in its place:
 
-#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+#+begin_src bash :tangle ./bin/setup.sh
   if [ ! -f "${darkirc_conf}" ]; then
     ${homelocalbin_dir}/${darkirc_bin}
   fi
@@ -103,7 +102,7 @@ And execute it the first time IF the config file isn't in its place:
 
 Symlink the runit files to =${SVDIR}=.  
 
-#+begin_src bash :tangle ./bin/setup.sh :mkdirp yes
+#+begin_src bash :tangle ./bin/setup.sh
   ln -sf ${runit_dir} ${svdir}/
 #+end_src
 
@@ -129,16 +128,14 @@ This file will hold the environment variables.
 This script starts the =darkirc=.  Redirect the stderr to stdout, so
 that we can keep track of the errors with =svloggerd=.
 
-#+begin_src bash :tangle ./bin/darkirc/run :mkdirp yes
-  #!/data/data/com.termux/files/usr/bin/sh
+#+begin_src bash :tangle ./bin/darkirc/run :mkdirp yes :shebang #!/data/data/com.termux/files/usr/bin/sh
   exec 2>&1
   exec ${homelocalbin_dir}/${darkirc_bin}
 #+end_src
 
 *** log/run
 
-#+begin_src bash :tangle ./bin/darkirc/log/run :mkdirp yes
-  #!/data/data/com.termux/files/usr/bin/sh
+#+begin_src bash :tangle ./bin/darkirc/log/run :mkdirp yes :shebang #!/data/data/com.termux/files/usr/bin/sh
   exec "${svlogger}" "$@"
 #+end_src
 
