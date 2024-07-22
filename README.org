@@ -10,34 +10,6 @@ Some simple runit scripts to automate starting and stopping the
 Can we do it without it?  How badly does android (grapheneOS) want to
 kill it when it's in the background?
 
-*** DONE fill-in the following scripts [2/2]
-CLOSED: [2024-07-22 Mon 16:01]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2024-07-22 Mon 16:01]
-:END:
-
-- [X] bin/setup.sh
-- [X] bin/darkirc/*
-
-*** DONE sign the sha256sum of the =darkirc.aarch64-android= you bundle with this repo
-CLOSED: [2024-07-22 Mon 15:59]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2024-07-22 Mon 15:59]
-:END:
-
-So that when we clone it, we can now there hasn't been any meddling on
-the github's side.
-
-*** DONE fix the conf stuff
-CLOSED: [2024-07-22 Mon 21:37]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2024-07-22 Mon 21:37]
-:END:
-
-Don't use the conf file.  Instead, put the env variables into their
-runit scripts.  I am having trouble with running the runit service.
-Also, don't use ${PREFIX} in runit scripts, use full path.
-
 ** Setup
 
 Git clone this repo in your termux home directory.  And then =cd= into
