@@ -3,12 +3,27 @@
 Some simple runit scripts to automate starting and stopping the
 [[https://darkrenaissance.github.io/darkfi/misc/darkirc/darkirc.html][DarkIRC]] daemon.
 
+The =setup.sh= script
+
+1) downloads the =darkirc= compiled binary:
+   - you can compile yourself and move it its proper directory,
+     =${HOME}/.local/bin= if you wish.
+   - I provide a signed sha256sum of the =darkirc= binary so that I
+     (you) know that github didn't meddle with it.
+2) creates runit scripts for =darkirc= so that:
+   - =darkirc= starts in the background automatically whenever you
+     start the [[https://termux.dev/en/][Termux app]].
+   - you can stop the =darkirc= using the =sv stop darkirc= command.
+   - you can see the =darkirc= daemon's logs using the =tail -f
+     ${PREFIX}/var/log/sv/darkirc/current= command.
+
 ** todos
 
 *** TODO do we need to use the command =termux-wake-lock= ?
 
 Can we do it without it?  How badly does android (grapheneOS) want to
-kill it when it's in the background?
+kill it when it's in the background?  Maybe, long tap on termux app ->
+battery settings -> allow running in the background, is enough?
 
 ** Setup
 
@@ -19,13 +34,30 @@ command if you want.
 #+begin_src bash
   pkg install git perl gnupg -y
   git clone https://github.com/k4r4b3y/darkirc-runit.git
-  cd darkirc-runit
 #+end_src
+
+Check the sha256sum of the =darkirc= binary:
+
+#+begin_src bash
+  cd ${HOME}/darkfi-runit/bin
+  shasum -c shasum.txt.asc
+#+end_src
+
+You should see the following in the output:
+
+#+begin_quote
+darkirc.aarch64-android: OK
+shasum: WARNING: 10 lines are improperly formatted
+#+end_quote
+
+The important line is the first one, =darkirc.aarch64-android: OK=.
+You can verify the signature on the =shasum.txt.asc= file with my gpg
+key on [[https://karapara.kyun.li/gpg]].
 
 Then, you should run the install script:
 
 #+begin_src bash
-  ./bin/setup.sh
+  ${HOME}/darkfi-runit/bin/setup.sh
 #+end_src
 
 During the =setup.sh= script execution, you might see your termux
@@ -54,6 +86,9 @@ Configuration file '/data/data/com.termux/files/usr/etc/apt/sources.list'
 #+end_quote
 
 Here, you can press =Y= and then hit =enter=.
+
+The rest of the documentation will go into what each of the scripts in
+this repo does.  Read on if you are curious.
 
 *** bin/setup.sh
 
