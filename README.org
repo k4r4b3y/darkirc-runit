@@ -81,7 +81,7 @@ files if they do not already exist:
   fi
 
   if [ ! -d "${runit_dir}" ]; then
-    mkdir "${runit_dir}"
+    mkdir -p "${runit_dir}"
   fi
 #+end_src
 

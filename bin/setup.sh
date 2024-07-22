@@ -13,7 +13,7 @@ if [ ! -d "${homelocalbin_dir}" ]; then
 fi
 
 if [ ! -d "${runit_dir}" ]; then
-  mkdir "${runit_dir}"
+  mkdir -p "${runit_dir}"
 fi
 
 cp bin/darkirc -t ${runit_dir}
