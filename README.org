@@ -15,7 +15,11 @@ kill it when it's in the background?
 - [ ] bin/setup.sh
 - [ ] bin/darkirc/*
 
-*** TODO sign the sha256sum of the =darkirc.aarch64-android= you bundle with this repo
+*** DONE sign the sha256sum of the =darkirc.aarch64-android= you bundle with this repo
+CLOSED: [2024-07-22 Mon 15:59]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2024-07-22 Mon 15:59]
+:END:
 
 So that when we clone it, we can now there hasn't been any meddling on
 the github's side.
